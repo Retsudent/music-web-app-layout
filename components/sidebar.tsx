@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
   Home,
   Search,
@@ -13,57 +14,70 @@ import {
   Disc3,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { userPlaylistData } from "@/lib/music-data"
 
 const mainNav = [
-  { label: "Beranda", icon: Home, active: true },
-  { label: "Cari", icon: Search, active: false },
-  { label: "Koleksimu", icon: Library, active: false },
+  { label: "Beranda", icon: Home, href: "/" },
+  { label: "Cari", icon: Search, href: "/cari" },
+  { label: "Koleksimu", icon: Library, href: "/koleksi" },
 ]
 
 const discoverNav = [
-  { label: "Radio", icon: Radio },
-  { label: "Podcast", icon: Mic2 },
-  { label: "Album Baru", icon: Disc3 },
+  { label: "Radio", icon: Radio, href: "/radio" },
+  { label: "Podcast", icon: Mic2, href: "/podcast" },
+  { label: "Album Baru", icon: Disc3, href: "/album-baru" },
 ]
 
-const userPlaylists = [
-  "Lagu yang Disukai",
-  "Mix Harian 1",
-  "Akustik Sore",
-  "Lari Pagi",
-  "Tidur Nyenyak",
-  "Throwback 2000-an",
-]
+function NavLink({
+  href,
+  label,
+  icon: Icon,
+  active,
+}: {
+  href: string
+  label: string
+  icon: typeof Home
+  active: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "flex items-center gap-4 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+        active
+          ? "bg-sidebar-accent text-sidebar-primary"
+          : "text-muted-foreground hover:text-sidebar-foreground",
+      )}
+    >
+      <Icon className="size-5" />
+      {label}
+    </Link>
+  )
+}
 
 export function Sidebar() {
-  const [activeItem, setActiveItem] = useState("Beranda")
+  const pathname = usePathname()
 
   return (
     <aside className="hidden md:flex w-64 shrink-0 flex-col gap-2 bg-sidebar p-3 text-sidebar-foreground">
-      <div className="flex items-center gap-2 px-3 py-4">
+      <Link href="/" className="flex items-center gap-2 px-3 py-4">
         <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Disc3 className="size-5" />
         </div>
         <span className="font-heading text-xl font-bold tracking-tight">
           Resonance
         </span>
-      </div>
+      </Link>
 
       <nav className="flex flex-col gap-1">
         {mainNav.map((item) => (
-          <button
+          <NavLink
             key={item.label}
-            onClick={() => setActiveItem(item.label)}
-            className={cn(
-              "flex items-center gap-4 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-              activeItem === item.label
-                ? "bg-sidebar-accent text-sidebar-primary"
-                : "text-muted-foreground hover:text-sidebar-foreground",
-            )}
-          >
-            <item.icon className="size-5" />
-            {item.label}
-          </button>
+            href={item.href}
+            label={item.label}
+            icon={item.icon}
+            active={pathname === item.href}
+          />
         ))}
       </nav>
 
@@ -72,19 +86,13 @@ export function Sidebar() {
           Jelajahi
         </p>
         {discoverNav.map((item) => (
-          <button
+          <NavLink
             key={item.label}
-            onClick={() => setActiveItem(item.label)}
-            className={cn(
-              "flex items-center gap-4 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-              activeItem === item.label
-                ? "bg-sidebar-accent text-sidebar-primary"
-                : "text-muted-foreground hover:text-sidebar-foreground",
-            )}
-          >
-            <item.icon className="size-5" />
-            {item.label}
-          </button>
+            href={item.href}
+            label={item.label}
+            icon={item.icon}
+            active={pathname === item.href}
+          />
         ))}
       </div>
 
@@ -103,22 +111,33 @@ export function Sidebar() {
 
       <div className="flex-1 overflow-y-auto">
         <ul className="flex flex-col gap-0.5">
-          <li>
-            <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-sidebar-foreground">
-              <span className="flex size-8 items-center justify-center rounded bg-gradient-to-br from-primary to-accent text-primary-foreground">
-                <Heart className="size-4" />
-              </span>
-              <span className="truncate font-medium">Lagu yang Disukai</span>
-            </button>
-          </li>
-          {userPlaylists.slice(1).map((name) => (
-            <li key={name}>
-              <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-sidebar-foreground">
-                <span className="flex size-8 items-center justify-center rounded bg-sidebar-accent">
-                  <ListMusic className="size-4" />
+          {userPlaylistData.map((playlist, index) => (
+            <li key={playlist.id}>
+              <Link
+                href={`/playlist/${playlist.id}`}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+                  pathname === `/playlist/${playlist.id}`
+                    ? "text-sidebar-foreground"
+                    : "text-muted-foreground hover:text-sidebar-foreground",
+                )}
+              >
+                <span
+                  className={cn(
+                    "flex size-8 items-center justify-center rounded",
+                    index === 0
+                      ? "bg-gradient-to-br from-primary to-accent text-primary-foreground"
+                      : "bg-sidebar-accent",
+                  )}
+                >
+                  {index === 0 ? (
+                    <Heart className="size-4" />
+                  ) : (
+                    <ListMusic className="size-4" />
+                  )}
                 </span>
-                <span className="truncate font-medium">{name}</span>
-              </button>
+                <span className="truncate font-medium">{playlist.title}</span>
+              </Link>
             </li>
           ))}
         </ul>

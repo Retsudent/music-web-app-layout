@@ -15,6 +15,37 @@ export type Playlist = {
   cover: string
 }
 
+export type Podcast = {
+  id: string
+  title: string
+  host: string
+  description: string
+  cover: string
+  episodes: number
+}
+
+export type RadioStation = {
+  id: string
+  title: string
+  description: string
+  cover: string
+  listeners: string
+}
+
+export type Genre = {
+  id: string
+  name: string
+  cover: string
+  color: string
+}
+
+export type Artist = {
+  id: string
+  name: string
+  cover: string
+  followers: string
+}
+
 export const featuredPlaylists: Playlist[] = [
   {
     id: "pl-1",
@@ -109,6 +140,24 @@ export const popularTracks: Track[] = [
     duration: "2:58",
     plays: "15.1 jt",
   },
+  {
+    id: "tr-7",
+    title: "Langit Sore",
+    artist: "Arka & Rumi",
+    album: "Padang Senja",
+    cover: "/albums/album-3.png",
+    duration: "3:51",
+    plays: "7.3 jt",
+  },
+  {
+    id: "tr-8",
+    title: "Sinyal Hilang",
+    artist: "Voltase",
+    album: "Analog",
+    cover: "/albums/album-4.png",
+    duration: "4:20",
+    plays: "4.1 jt",
+  },
 ]
 
 export const recentAlbums: Playlist[] = [
@@ -142,4 +191,159 @@ export const recentAlbums: Playlist[] = [
     description: "Gana",
     cover: "/albums/album-6.png",
   },
+  {
+    id: "al-6",
+    title: "Asap & Madu",
+    description: "Laras Wening",
+    cover: "/albums/album-5.png",
+  },
 ]
+
+export const podcasts: Podcast[] = [
+  {
+    id: "pc-1",
+    title: "Obrolan Tengah Malam",
+    host: "Dimas & Sari",
+    description: "Diskusi santai seputar kehidupan, karier, dan hubungan.",
+    cover: "/podcasts/podcast-1.png",
+    episodes: 142,
+  },
+  {
+    id: "pc-2",
+    title: "Bisnis Tanpa Batas",
+    host: "Reza Pratama",
+    description: "Wawasan startup, teknologi, dan strategi bertumbuh.",
+    cover: "/podcasts/podcast-2.png",
+    episodes: 88,
+  },
+  {
+    id: "pc-3",
+    title: "Jejak Gelap",
+    host: "Nadia Hartono",
+    description: "Kisah kriminal nyata yang menegangkan setiap pekan.",
+    cover: "/podcasts/podcast-3.png",
+    episodes: 56,
+  },
+  {
+    id: "pc-4",
+    title: "Tenang Sejenak",
+    host: "Studio Hening",
+    description: "Meditasi terpandu dan cerita pengantar tidur.",
+    cover: "/podcasts/podcast-4.png",
+    episodes: 210,
+  },
+]
+
+export const radioStations: RadioStation[] = [
+  {
+    id: "rd-1",
+    title: "Radio Pop Indonesia",
+    description: "Hits pop lokal sepanjang hari",
+    cover: "/albums/album-1.png",
+    listeners: "32 rb",
+  },
+  {
+    id: "rd-2",
+    title: "Lo-Fi Santai",
+    description: "Beat lembut untuk belajar dan kerja",
+    cover: "/albums/album-4.png",
+    listeners: "58 rb",
+  },
+  {
+    id: "rd-3",
+    title: "Jazz Malam",
+    description: "Nada jazz hangat menemani malammu",
+    cover: "/albums/album-5.png",
+    listeners: "14 rb",
+  },
+  {
+    id: "rd-4",
+    title: "Beat Elektronik",
+    description: "Energi EDM dan house non-stop",
+    cover: "/albums/album-2.png",
+    listeners: "41 rb",
+  },
+  {
+    id: "rd-5",
+    title: "Akustik Senja",
+    description: "Petikan gitar dan vokal lembut",
+    cover: "/albums/album-3.png",
+    listeners: "23 rb",
+  },
+  {
+    id: "rd-6",
+    title: "Groove Jalanan",
+    description: "Hip hop dan R&B pilihan",
+    cover: "/albums/album-6.png",
+    listeners: "37 rb",
+  },
+]
+
+export const genres: Genre[] = [
+  { id: "gn-1", name: "Pop", cover: "/albums/album-1.png", color: "oklch(0.68 0.2 38)" },
+  { id: "gn-2", name: "Elektronik", cover: "/albums/album-2.png", color: "oklch(0.62 0.12 200)" },
+  { id: "gn-3", name: "Indie & Folk", cover: "/albums/album-3.png", color: "oklch(0.7 0.12 80)" },
+  { id: "gn-4", name: "Rock", cover: "/albums/album-4.png", color: "oklch(0.55 0.18 25)" },
+  { id: "gn-5", name: "Jazz & Soul", cover: "/albums/album-5.png", color: "oklch(0.5 0.1 320)" },
+  { id: "gn-6", name: "Hip Hop", cover: "/albums/album-6.png", color: "oklch(0.6 0.15 50)" },
+  { id: "gn-7", name: "Dangdut", cover: "/albums/album-2.png", color: "oklch(0.65 0.16 150)" },
+  { id: "gn-8", name: "Klasik", cover: "/albums/album-4.png", color: "oklch(0.55 0.08 260)" },
+]
+
+export const artists: Artist[] = [
+  { id: "ar-1", name: "Maya Anindita", cover: "/albums/album-1.png", followers: "2.1 jt" },
+  { id: "ar-2", name: "Sintala", cover: "/albums/album-2.png", followers: "1.4 jt" },
+  { id: "ar-3", name: "Arka & Rumi", cover: "/albums/album-3.png", followers: "3.8 jt" },
+  { id: "ar-4", name: "Voltase", cover: "/albums/album-4.png", followers: "890 rb" },
+  { id: "ar-5", name: "Laras Wening", cover: "/albums/album-5.png", followers: "1.7 jt" },
+  { id: "ar-6", name: "Gana", cover: "/albums/album-6.png", followers: "2.6 jt" },
+]
+
+export const userPlaylistData: Playlist[] = [
+  {
+    id: "up-liked",
+    title: "Lagu yang Disukai",
+    description: "248 lagu",
+    cover: "/albums/album-1.png",
+  },
+  {
+    id: "up-1",
+    title: "Mix Harian 1",
+    description: "Dibuat untukmu oleh Resonance",
+    cover: "/albums/album-2.png",
+  },
+  {
+    id: "up-2",
+    title: "Akustik Sore",
+    description: "32 lagu",
+    cover: "/albums/album-3.png",
+  },
+  {
+    id: "up-3",
+    title: "Lari Pagi",
+    description: "48 lagu",
+    cover: "/albums/album-6.png",
+  },
+  {
+    id: "up-4",
+    title: "Tidur Nyenyak",
+    description: "60 lagu",
+    cover: "/albums/album-4.png",
+  },
+  {
+    id: "up-5",
+    title: "Throwback 2000-an",
+    description: "75 lagu",
+    cover: "/albums/album-5.png",
+  },
+]
+
+export const allPlaylists: Playlist[] = [
+  ...featuredPlaylists,
+  ...recentAlbums,
+  ...userPlaylistData,
+]
+
+export function getPlaylistById(id: string): Playlist | undefined {
+  return allPlaylists.find((p) => p.id === id)
+}
