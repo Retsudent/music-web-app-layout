@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import {
   Play,
   Pause,
@@ -24,13 +25,15 @@ export function PlayerBar() {
     <footer className="flex items-center justify-between gap-4 border-t border-border bg-card px-3 py-3 md:px-6">
       {/* Now playing info */}
       <div className="flex min-w-0 items-center gap-3 md:w-1/4">
-        <Image
-          src="/albums/album-1.png"
-          alt="Sampul album Sorot"
-          width={56}
-          height={56}
-          className="size-12 rounded-md object-cover md:size-14"
-        />
+        <Link href="/lagu/tr-1" aria-label="Buka layar lagu">
+          <Image
+            src="/albums/album-1.png"
+            alt="Sampul album Sorot"
+            width={56}
+            height={56}
+            className="size-12 rounded-md object-cover transition-opacity hover:opacity-80 md:size-14"
+          />
+        </Link>
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold">Cahaya Terakhir</p>
           <p className="truncate text-xs text-muted-foreground">
@@ -116,12 +119,13 @@ export function PlayerBar() {
             <div className="absolute inset-y-0 left-0 w-2/3 rounded-full bg-foreground" />
           </div>
         </div>
-        <button
+        <Link
+          href="/lagu/tr-1"
           className="text-muted-foreground transition-colors hover:text-foreground"
           aria-label="Layar penuh"
         >
           <Maximize2 className="size-4" />
-        </button>
+        </Link>
       </div>
     </footer>
   )

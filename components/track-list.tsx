@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Play, Clock, MoreHorizontal } from "lucide-react"
 import type { Track } from "@/lib/music-data"
 
@@ -43,7 +44,12 @@ export function TrackList({ tracks, showHeader = true }: TrackListProps) {
               className="size-10 shrink-0 rounded object-cover"
             />
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium">{track.title}</p>
+              <Link
+                href={`/lagu/${track.id}`}
+                className="truncate text-sm font-medium hover:underline"
+              >
+                {track.title}
+              </Link>
               <p className="truncate text-xs text-muted-foreground">
                 {track.artist}
               </p>

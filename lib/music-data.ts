@@ -347,3 +347,44 @@ export const allPlaylists: Playlist[] = [
 export function getPlaylistById(id: string): Playlist | undefined {
   return allPlaylists.find((p) => p.id === id)
 }
+
+export function getTrackById(id: string): Track | undefined {
+  return popularTracks.find((t) => t.id === id)
+}
+
+export type LyricLine = {
+  time: number // detik
+  text: string
+}
+
+// Lirik bersinkron waktu (placeholder). Kunci = id lagu.
+export const lyricsByTrack: Record<string, LyricLine[]> = {
+  "tr-1": [
+    { time: 0, text: "Cahaya terakhir di ujung senja" },
+    { time: 8, text: "Memeluk langit yang mulai lelah" },
+    { time: 16, text: "Aku berdiri di antara bayang" },
+    { time: 24, text: "Mencari arah yang pernah hilang" },
+    { time: 33, text: "Dan kuberjanji takkan menyerah" },
+    { time: 41, text: "Meski malam datang menggoda" },
+    { time: 49, text: "Cahaya terakhir, tetaplah menyala" },
+    { time: 58, text: "Sampai pagi membuka mata" },
+    { time: 67, text: "Di setiap luka ada cerita" },
+    { time: 75, text: "Yang mengajarkan arti percaya" },
+    { time: 84, text: "Kupejamkan mata, kudengar suara" },
+    { time: 92, text: "Memanggil pulang ke rumah jiwa" },
+    { time: 101, text: "Cahaya terakhir, jangan kau padam" },
+    { time: 110, text: "Temani aku melewati kelam" },
+    { time: 119, text: "Sampai esok kembali bersinar" },
+    { time: 128, text: "Dan semua mimpi jadi nyata" },
+  ],
+}
+
+export function getLyrics(trackId: string): LyricLine[] {
+  return lyricsByTrack[trackId] ?? lyricsByTrack["tr-1"]
+}
+
+// Ubah durasi "m:ss" menjadi total detik
+export function durationToSeconds(duration: string): number {
+  const [m, s] = duration.split(":").map(Number)
+  return (m || 0) * 60 + (s || 0)
+}
